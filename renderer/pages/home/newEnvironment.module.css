@@ -1,0 +1,12 @@
+.newEnvironment {
+    padding: 25px;
+    background-color: #1f1f23;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.span {
+    width: 90px;
+}

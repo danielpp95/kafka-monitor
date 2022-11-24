@@ -1,0 +1,30 @@
+.home {
+    display: grid;
+    grid-template-areas:
+        "title title"
+        "selectEnvironment newEnvironment";
+    grid-template-rows: 50px auto;
+    grid-template-columns: 1fr 1fr;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.homeTitle {
+    grid-area: title;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #18181b;
+}
+
+.homeSelectEnvironment{
+    grid-area: selectEnvironment;
+    color: red
+}
+
+.homeNewEnvironment{
+    grid-area: newEnvironment;
+}
