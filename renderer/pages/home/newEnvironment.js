@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './newEnvironment.module.css'
 import { InsertEnvironment } from '../../../main/db'
+import { NewGuid } from '../../../main/helpers/helpers'
 
 export default function NewEnvironment() {
   // const [hasAuthentication, setHasAuthentication] = useState(false);
@@ -14,16 +15,21 @@ export default function NewEnvironment() {
     }
 
     InsertEnvironment({
+      id: NewGuid(),
       name: clusterName,
       servers: servers,
     });
 
     setClusterName('');
     setServers('');
+    
+    window.location.reload(false);
   }
 
   return (
     <div className={styles.newEnvironment}>
+
+      <h3>New Environment</h3>
 
       <div className="row">
         <span className={styles.span}>Name</span>

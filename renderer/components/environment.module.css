@@ -1,0 +1,18 @@
+.p {
+    margin: 0;
+    font-weight: 800;
+}
+
+.span {
+    font-weight: 200;
+}
+
+.environment {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+.environment:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}

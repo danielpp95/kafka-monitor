@@ -14,3 +14,8 @@ export const InsertEnvironment = (environment) => {
 
     store.set(environmentsCollectionName, environments);
 }
+
+export const DeleteEnvironmentById = (id) => {
+    const environments = GetEnvironments().filter(x => x.id !== id);
+    store.set(environmentsCollectionName, environments);
+}
