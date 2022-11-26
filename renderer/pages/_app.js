@@ -20,7 +20,7 @@ const MyApp = ({ Component, pageProps }) => {
         </Link>
 
         <Link href={`/environments/${id}/consumerGroups`}>
-          <div className={styles.link}>Consumer Groups</div>
+          <div className={styles.link}>Consumers</div>
         </Link>
       </div>
       

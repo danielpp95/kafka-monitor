@@ -5,18 +5,18 @@ import styles from './consumer.module.css'
 export default function consumer({
     topic,
     servers,
-    fromBeginning}) {
+    fromBeginning,
+    groupId}) {
     const [messages, setMessages] = useState([])
 
     useEffect(() => {
         const getMessages = async (setMessage) => {
-            debugger
             const kafka = new Kafka({
                 clientId: 'kafka-monitor',
                 brokers: servers,
             })
     
-            const consumer = kafka.consumer({ groupId:`kafka-monitor-${NewGuid()}` });
+            const consumer = kafka.consumer({ groupId });
             await consumer.connect();
             await consumer.subscribe({ topic, fromBeginning })
 
@@ -36,7 +36,6 @@ export default function consumer({
         }
 
         getMessages(setMessages);
-    
     }, [])
         
   return (

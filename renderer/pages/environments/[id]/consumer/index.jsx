@@ -56,6 +56,7 @@ export default function index() {
                 fromBeginning={x.fromBeginning}
                 servers={servers}
                 topic={x.topic}
+                groupId={x.id}
                 key={x.id}
                 />)}
         </div>

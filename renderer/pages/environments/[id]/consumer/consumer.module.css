@@ -5,6 +5,7 @@
     position: relative;
     height: 100%;
     width: 500px;
+    min-width: 500px;
     box-sizing: content-box;
 }
 

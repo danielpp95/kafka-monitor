@@ -10,7 +10,7 @@ export default function addConsumer({topics, addConsumer}) {
         addConsumer({
             topic: selectedTopic,
             fromBeginning: consumeFromBeginning,
-            id: NewGuid()
+            id: `Kafka-monitor-consumer-${NewGuid()}`
         })
     }
 

@@ -24,4 +24,5 @@
     display: flex;
     gap: 1em;
     justify-content: left;
+    overflow-x: scroll;
 }

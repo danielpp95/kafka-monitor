@@ -1,0 +1,15 @@
+.main {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.consumer {
+    padding: 1em;    
+    background-color: #1f1f23;
+}
+
+.consumer:hover {
+    background-color: hsla(0,0%,100%,.13);
+}
