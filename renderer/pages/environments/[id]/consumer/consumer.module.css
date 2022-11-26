@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 500px;
+    box-sizing: content-box;
 }
 
 .h2 {
@@ -27,10 +27,12 @@
     left: 0;
     right: 0;
     margin-top: 50px;
-    min-width: 300px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .message {
+    box-sizing: border-box;
     background-color: #1f1f23;
     padding: 1em 1.5em;
     /* max-width: 500px; */

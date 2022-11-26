@@ -13,7 +13,6 @@ export default function index() {
     const [consumers, setConsumers] = useState([]);
     const [topics, setTopics] = useState([]);
     const [servers, setServers] = useState([]);
-    const [groupId, setGroupId] = useState('');
 
     const addToConsumers = (x) => {
         setConsumers([...consumers, x]);
@@ -26,8 +25,6 @@ export default function index() {
         if (!environment) {
             return;
         }
-
-        setGroupId(`kafka-monitor-${NewGuid()}`);
 
         setServers(environment.servers.split(','))
 
@@ -57,7 +54,6 @@ export default function index() {
             {consumers.map(x =>
                 <Consumer
                 fromBeginning={x.fromBeginning}
-                groupId={groupId}
                 servers={servers}
                 topic={x.topic}
                 key={x.id}
