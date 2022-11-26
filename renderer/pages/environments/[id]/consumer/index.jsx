@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { Kafka } from 'kafkajs';
 import { GetConsumersGroup, GetEnvironments, InsertConsumersGroup } from '../../../../../main/db'
 import { NewGuid } from '../../../../../main/helpers/helpers'
-import AddConsumer from './addConsumer'
-import Consumer from './consumer'
+import AddConsumer from '../../../../components/addConsumer/addConsumer'
+import Consumer from '../../../../components/consumer/consumer'
 import styles from './index.module.css'
 
 export default function index() {

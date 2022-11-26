@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './addConsumer.module.css'
-import { NewGuid } from '../../../../../main/helpers/helpers'
+import { NewGuid } from '../../../main/helpers/helpers'
 
 export default function addConsumer({topics, addConsumer, preSelectedTopic}) {
     const [selectedTopic, setSelectedTopic] = useState(preSelectedTopic ?? '');

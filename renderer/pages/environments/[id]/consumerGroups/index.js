@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { DeleteConsumerGroupById, GetConsumersGroup } from '../../../../../main/db'
 import styles from './index.module.css'
+import Loading from '../../../../components/loading/loading'
+import EmptyList from '../../../../components/empty/empty'
 
 export default function index() {
     const router = useRouter()
@@ -23,11 +25,11 @@ export default function index() {
     }
 
     if(consumerGroups === null) {
-        return <div>Loading...</div>
+        return <Loading />
     }
     
     if (consumerGroups.length === 0) {
-        return <div>Nothing to show</div>
+        return <EmptyList />
     }
 
     return (

@@ -52,3 +52,7 @@ body {
     background-color: hsla(0,0%,100%,.13);
     cursor: pointer;
   }
+
+.padding {
+  padding: 1em;
+}

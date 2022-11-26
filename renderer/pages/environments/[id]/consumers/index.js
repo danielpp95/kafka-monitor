@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import { GetEnvironments } from '../../../../../main/db'
 import { Kafka } from 'kafkajs';
 import styles from './index.module.css'
+import Loading from '../../../../components/loading/loading'
+import EmptyList from '../../../../components/empty/empty'
 
 export default function index() {
   const router = useRouter()
@@ -48,15 +50,11 @@ export default function index() {
   }
 
   if (groups === null) {
-    return <div className={styles.main}>
-      <h1>Loading...</h1>
-    </div>
+    return <Loading />
   }
 
   if (groups.length === 0) {
-    return <div className={styles.main}>
-      <h1>No consumers to show</h1>
-    </div>
+    return <EmptyList />
   }
 
   return (

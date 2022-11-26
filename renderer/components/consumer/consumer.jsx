@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { NewGuid } from '../../../../../main/helpers/helpers'
 import { Kafka } from 'kafkajs';
 import styles from './consumer.module.css'
 export default function consumer({
@@ -17,7 +16,7 @@ export default function consumer({
                 brokers: servers,
             })
 
-            consumer = kafka.consumer({ groupId, rebalanceTimeout: 5000 });
+            consumer = kafka.consumer({ groupId });
             await consumer.connect();
             await consumer.subscribe({ topic, fromBeginning })
 
