@@ -1,0 +1,28 @@
+.messages {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.message {
+    background-color: #1f1f23;
+    padding: 1em 1.5em;
+    max-width: 500px;
+    word-wrap: break-word;
+}
+
+.topic {
+    font-weight: 800;
+    word-wrap: break-word;
+}
+
+.firstMessage {
+    animation: newMessage 1s;
+}
+
+@keyframes newMessage {
+    0% {background-color: #1f1f23;}
+    50% {background-color: rgb(136, 136, 47);}
+    100% {background-color: #1f1f23;}
+}

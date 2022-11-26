@@ -1,0 +1,30 @@
+.main {
+    padding: 1em 2em;
+    margin: 1em;
+    /* width: 300px; */
+    background-color: #1f1f23;
+    display: flex;
+    align-items: center;
+}
+
+.h2{
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1em;
+    gap: 15px;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 1em; */
+}
+
+.button {
+    padding: 1em;
+}

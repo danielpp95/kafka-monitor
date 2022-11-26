@@ -12,7 +12,7 @@ export default function environment({name, servers, id}) {
   }
 
   return (
-    <Link href={`environments/${id}`} >
+    <Link href={`environments/${id}/topics`} >
         <div className={styles.environment}>
             <div>
               <p className={styles.p}>{name}</p>

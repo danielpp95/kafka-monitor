@@ -1,0 +1,15 @@
+.main {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.main:hover {
+    background-color: hsla(0,0%,100%,.13);
+}
+
+.topic {
+    font-weight: 800;
+    margin-right: 1em;
+}
