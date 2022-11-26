@@ -19,6 +19,8 @@ if (isProd) {
     height: 600,
   });
 
+  mainWindow.setMenu(null)
+
   if (isProd) {
     await mainWindow.loadURL('app://./home.html');
   } else {
