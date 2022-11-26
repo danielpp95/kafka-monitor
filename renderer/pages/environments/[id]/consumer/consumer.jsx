@@ -10,13 +10,14 @@ export default function consumer({
     const [messages, setMessages] = useState([])
 
     useEffect(() => {
+        let consumer = null;
         const getMessages = async (setMessage) => {
             const kafka = new Kafka({
                 clientId: 'kafka-monitor',
                 brokers: servers,
             })
-    
-            const consumer = kafka.consumer({ groupId });
+
+            consumer = kafka.consumer({ groupId, rebalanceTimeout: 5000 });
             await consumer.connect();
             await consumer.subscribe({ topic, fromBeginning })
 
@@ -34,8 +35,12 @@ export default function consumer({
                 },
             })
         }
-
+        
         getMessages(setMessages);
+        
+        return () => {
+            return consumer.disconnect()
+          }
     }, [])
         
   return (

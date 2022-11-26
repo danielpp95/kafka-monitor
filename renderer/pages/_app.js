@@ -19,8 +19,12 @@ const MyApp = ({ Component, pageProps }) => {
           <div className={styles.link}>Topics</div>
         </Link>
 
-        <Link href={`/environments/${id}/consumerGroups`}>
+        <Link href={`/environments/${id}/consumers`}>
           <div className={styles.link}>Consumers</div>
+        </Link>
+
+        <Link href={`/environments/${id}/consumerGroups`}>
+          <div className={styles.link}>Consumer Groups</div>
         </Link>
       </div>
       

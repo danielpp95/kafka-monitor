@@ -26,3 +26,34 @@
     justify-content: left;
     overflow-x: scroll;
 }
+
+.buttonSaveModal {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    height: 88px;
+    width: 88px;
+    border-radius: 50%;
+    background-color: #18181b;
+}
+
+.buttonSaveModal:hover {
+    background-color: #323238;
+}
+
+.modal {
+    position: absolute;
+    background-color: #323238;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.buttonSave {
+    font-size: 14px;
+    padding: 1em 2em;
+}
