@@ -1,11 +1,17 @@
 import Store from 'electron-store';
 
-const environmentsCollectionName = "environments";
+const environmentsCollectionName = "environments-v1";
 
 const store = new Store({ name: environmentsCollectionName });
 
 export const GetEnvironments = () => {
-    return store.get(environmentsCollectionName) || [];
+    const environments = store.get(environmentsCollectionName) || [];
+    
+    if (Object.keys(environments).length === 0) {
+        return [];
+    }
+
+    return environments || [];
 }
 
 export const InsertEnvironment = (environment) => {
@@ -21,11 +27,6 @@ export const DeleteEnvironmentById = (id) => {
 }
 
 // Consumer Groups
-function isPlainObject(value) {
-    return value instanceof Object &&
-           Object.getPrototypeOf(value) == Object.prototype;
-}
-
 const consumerGroupsCollectionName = "consumerGroups-v1";
 
 const consumerGroupsStore = new Store({ name: consumerGroupsCollectionName });
@@ -36,6 +37,7 @@ export const GetConsumersGroup = () => {
     if (Object.keys(consumers).length === 0) {
         return [];
     }
+
     return consumerGroupsStore.get(consumerGroupsCollectionName) || [];
 }
 

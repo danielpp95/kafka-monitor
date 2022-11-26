@@ -1,14 +1,15 @@
 {
   "private": true,
-  "name": "my-nextron-app",
-  "description": "My application description",
-  "version": "1.0.0",
+  "name": "kafka-monitor",
+  "description": "A tool to monitoring multiples kafka topic at the same time.",
+  "version": "0.0.1",
   "author": "Yoshihide Shiono <shiono.yoshihide@gmail.com>",
   "main": "app/background.js",
   "scripts": {
     "dev": "nextron",
     "build": "nextron build",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "build:win32": "nextron build --win --ia32"
   },
   "dependencies": {
     "electron-serve": "^1.1.0",

@@ -46,7 +46,9 @@ export default function index() {
     } catch (error) {
       console.error(error)
     }
-    window.location.reload(false);
+
+    var groups = await admin.listGroups();
+    setGroups(groups.groups);
   }
 
   if (groups === null) {

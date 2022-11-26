@@ -1,6 +1,6 @@
-appId: com.example.nextron
-productName: My Nextron App
-copyright: Copyright © 2018 Yoshihide Shiono
+appId: com.example.kafka-monitor
+productName: Kafka monitor
+copyright: Copyright © 2022 Daniel Perez
 directories:
   output: dist
   buildResources: resources

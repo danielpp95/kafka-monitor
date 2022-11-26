@@ -20,7 +20,7 @@ export default function index() {
 
         if (confirm(`Do you want to delete '${consumer.name}'`)) {
             DeleteConsumerGroupById(consumer.id);
-            window.location.reload(false);
+            setConsumerGroups(GetConsumersGroup());
         }
     }
 
