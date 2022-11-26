@@ -31,8 +31,6 @@ export default function consumer({
                     }]
                     messages = newArray
                     setMessage(newArray)
-
-                    console.log(newArray)
                 },
             })
         }
@@ -42,28 +40,20 @@ export default function consumer({
     }, [])
         
   return (
-    <div>
-        <h2>{topic}</h2>
+    <div className={styles.main}>
+        <h2 className={styles.h2}>{topic}</h2>
         <div className={styles.messages}>
             {
                 messages
                     .reverse()
                     .map((x, index) => {
-                        return (
-                            
-                            <div
-                            key={index}
-                            className={styles.message}
-                            // style={{
-                            //     backgroundColor: index == 0 && showHighlight ? 'rgb(136, 136, 47)' : ''
-                            // }}
-                            >
-                                <p className={styles.topic}>{x.headers['Message-Type'].toString()}</p>
+                        return (                            
+                            <div key={index} className={styles.message}>
+                                <p className={styles.topic}>{x.headers['Message-Type']?.toString()}</p>
                                 <p className={styles.body} >{x.message}</p>
                             </div>
                             )
-                        }
-                    )
+                    })
             }
         </div>
     </div>

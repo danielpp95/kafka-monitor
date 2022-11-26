@@ -45,18 +45,23 @@ export default function index() {
     
     }, [id])
 
-    return <div className="main">
-        <AddConsumer
-            addConsumer={addToConsumers}
-            topics={topics}
-        />
-        {consumers.map(x =>
-            <Consumer
+    return <div className={styles.main}>
+        <div className={styles.addConsumer}>
+            <AddConsumer
+                addConsumer={addToConsumers}
+                topics={topics}
+            />
+        </div>
+
+        <div className={styles.consumersContainer}>
+            {consumers.map(x =>
+                <Consumer
                 fromBeginning={x.fromBeginning}
                 groupId={groupId}
                 servers={servers}
                 topic={x.topic}
                 key={x.id}
-            />)}
+                />)}
+        </div>
     </div>
 }
