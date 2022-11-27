@@ -26,6 +26,11 @@ export default function index() {
             const topicsMetadata = await admin.fetchTopicMetadata(topicList);
             
             setTopics(topicsMetadata.topics);
+
+            return () => {
+                admin.disconnect()
+                kafka.disconnect()
+            }
       }
 
       getTopics();

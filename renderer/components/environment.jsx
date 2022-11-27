@@ -1,14 +1,16 @@
 import React from 'react'
 import styles from './environment.module.css'
 import Link from 'next/link'
-import { DeleteEnvironmentById } from '../../main/db'
 
-export default function environment({name, servers, id}) {
+export default function environment({
+  name,
+  servers,
+  id,
+  RemoveEnvironmentById}) {
 
   const deleteById = (e) => {
     if (e.stopPropagation) e.stopPropagation();
-    DeleteEnvironmentById(id);
-    window.location.reload(false);
+    RemoveEnvironmentById(id);
   }
 
   return (

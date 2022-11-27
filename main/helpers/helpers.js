@@ -24,5 +24,13 @@ export function GetKafkaBusByEnvironment(
   return new Kafka({
       clientId: clientId,
       brokers: environment.servers.split(','),
+      ssl: environment.useAuthentication ?? false,
+      sasl: environment.useAuthentication ?
+        {
+          username: environment.username,
+          password: environment.password,
+          mechanism: environment.mechanism,
+        } :
+        undefined,
   });
 }

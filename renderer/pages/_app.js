@@ -8,8 +8,7 @@ const MyApp = ({ Component, pageProps }) => {
   const router = useRouter()
   const { id } = router.query
 
-    return <>
-      
+    return <>      
       <div className={styles.homeTitle} >
         <Link href={'/home'}>
           <div className={styles.link}>Kafka Monitor</div>
@@ -25,6 +24,10 @@ const MyApp = ({ Component, pageProps }) => {
 
         <Link href={`/environments/${id}/consumerGroups`}>
           <div className={styles.link}>Consumer Groups</div>
+        </Link>
+
+        <Link href={`/environments/${id}/consumer`}>
+          <div className={styles.link}>Consume Messages</div>
         </Link>
       </div>
       

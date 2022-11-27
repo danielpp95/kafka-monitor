@@ -1,0 +1,12 @@
+.error {
+    color: red;
+    margin-bottom: 5px;
+}
+.flex {
+    display: flex;
+    align-items: center;
+}
+
+.span {
+    width: 90px;
+}
