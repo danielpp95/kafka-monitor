@@ -5,6 +5,7 @@
     background-color: #1f1f23;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .h2{
@@ -27,4 +28,8 @@
 
 .button {
     padding: 1em;
+}
+
+.topics {
+    width: 300px;
 }

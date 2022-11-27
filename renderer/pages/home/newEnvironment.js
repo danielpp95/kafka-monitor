@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './newEnvironment.module.css'
 import { NewGuid } from '../../../main/helpers/helpers'
 import ValidationInput from '../../components/input/validationText'
+import Select from '../../components/input/select'
 
 export default function NewEnvironment({insertEnvironment}) {
   const [clusterName, setClusterName] = useState('');
@@ -110,14 +111,13 @@ export default function NewEnvironment({insertEnvironment}) {
       { 
         hasAuthentication &&
         <>
-          <div className="row">
-            <span className={styles.span} >Mechanism</span>
-            <select onChange={(x) => setMechanism(x.target.value)} value={mechanism}>
-              <option value="plain">plain</option>
-              <option value="scram-sha-256">scram-sha-256</option>
-              <option value="scram-sha-512">scram-sha-512</option>
-            </select>
-          </div>
+          <Select
+            options={['plain', 'scram-sha-256', 'scram-sha-512']}
+            onChange={setMechanism}
+            value={mechanism}
+            useBlankLine={false}
+            name='Mechanism'
+          />
 
           <ValidationInput
             field='Username'
@@ -137,7 +137,7 @@ export default function NewEnvironment({insertEnvironment}) {
         </>
       }
 
-      <button onClick={() => save()}>
+      <button onClick={() => save()} className={styles.button}>
         Save
       </button>
 

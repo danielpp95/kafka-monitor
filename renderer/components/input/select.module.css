@@ -1,0 +1,75 @@
+.span {
+    width: 90px;
+}
+
+.main {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+.select {
+    position: relative;
+    width: 100%;
+}
+
+.value {
+    width: 100%;
+    padding: 1em;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.value > button {
+    width: 100%;
+}
+
+.value > button > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search {
+    position: absolute;
+    margin: 1em 1em 1em 1em;
+    height: 50px;
+    left: 0;
+    top: 50px;
+    right: 0;
+    /* bottom: 0; */
+}
+
+.searchInput {
+    border-radius: 0 !important;
+    height: 100% !important;
+    background-color:rgb(70, 70, 70) !important;
+    border-width: 0 !important;
+}
+
+.options {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(70, 70, 70) !important;
+    top: 100px;
+    right: 0;
+    left: 0;
+    margin: 1em 1em 1em 1em;
+}
+
+.option {
+    padding: 1em;
+    border-bottom: 1px solid rgb(140, 140, 140);
+}
+
+.option:last-child {
+    border-bottom: 0;
+}
+
+.optionSelected {
+    padding: 1em;
+    background-color:rgb(50, 50, 50) !important;
+    border-bottom: 1px solid rgb(140, 140, 140);
+}
