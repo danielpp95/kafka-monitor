@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import { Kafka } from 'kafkajs';
-import { GetConsumersGroup, GetEnvironments, InsertConsumersGroup } from '../../../../../main/db'
-import { NewGuid } from '../../../../../main/helpers/helpers'
+import { GetConsumersGroup, InsertConsumersGroup } from '../../../../../main/db'
+import { GetEnvironmentById, GetKafkaBusByEnvironment, NewGuid } from '../../../../../main/helpers/helpers'
 import AddConsumer from '../../../../components/addConsumer/addConsumer'
 import Consumer from '../../../../components/consumer/consumer'
 import styles from './index.module.css'
@@ -21,26 +20,21 @@ export default function index() {
     }
 
     useEffect(() => {
-        const environment = GetEnvironments()
-            .filter(x => x.id === id)[0];
+        const environment = GetEnvironmentById(id);
 
         if (!environment) {
             return;
         }
 
-        setServers(environment.servers.split(','))
+        setServers(environment.servers.split(','));
 
         const getTopics = async() => {
-            const kafka = new Kafka({
-                clientId: 'kafka-monitor',
-                brokers: environment.servers.split(',')
-            });
-    
-            const admin = kafka.admin()
+            const kafka = GetKafkaBusByEnvironment(environment);
+            const admin = kafka.admin();
             setTopics(await admin.listTopics());
         }
 
-        getTopics()
+        getTopics();
     
     }, [id])
 
@@ -91,7 +85,7 @@ export default function index() {
             {consumers.map(x =>
                 <Consumer
                 fromBeginning={x.fromBeginning}
-                servers={servers}
+                environmentId={id}
                 topic={x.topic}
                 groupId={x.id}
                 key={x.id}

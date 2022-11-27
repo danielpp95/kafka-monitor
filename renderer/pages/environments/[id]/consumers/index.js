@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { GetEnvironments } from '../../../../../main/db'
-import { Kafka } from 'kafkajs';
 import styles from './index.module.css'
 import Loading from '../../../../components/loading/loading'
 import EmptyList from '../../../../components/empty/empty'
+import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../../../main/helpers/helpers';
 
 export default function index() {
   const router = useRouter()
@@ -14,41 +13,36 @@ export default function index() {
   const [kafkaAdmin, setKafkaAdmin] = useState(null);
 
   useEffect(() => {
-    const environment = GetEnvironments()
-        .filter(x => x.id === id)[0];
+    const environment = GetEnvironmentById(id);
 
     if (!environment) {
-        return;
+      return;
     }
 
+    setServers(environment.servers);
+  
     const getTopics = async() => {
-        const kafka = new Kafka({
-            clientId: 'kafka-monitor',
-            brokers: environment.servers.split(',')
-        });
-
-        setServers(environment.servers)
-
-        const admin = kafka.admin()
-        setKafkaAdmin(admin);
-
-        var groups = await admin.listGroups();
-        setGroups(groups.groups);
+      const kafka = GetKafkaBusByEnvironment(environment);
+      const admin = kafka.admin();
+      setKafkaAdmin(admin);
+      var groups = await admin.listGroups();
+      setGroups(groups.groups);
     }
 
-    
     getTopics()
   }, [id])
   
-  const deleteConsumerById = async (id) => {
+  const deleteConsumer = async (consumer) => {
     try {
-      await kafkaAdmin.deleteGroups([id]);
+      if (confirm(`Do you want to delete '${consumer.groupId}'`)) {
+        await kafkaAdmin.deleteGroups([consumer.groupId]);
+
+        var groups = await kafkaAdmin.listGroups();
+        setGroups(groups.groups);
+      }
     } catch (error) {
       console.error(error)
     }
-
-    var groups = await admin.listGroups();
-    setGroups(groups.groups);
   }
 
   if (groups === null) {
@@ -65,7 +59,7 @@ export default function index() {
       {
         groups.map(x => <div key={x.groupId} className={styles.consumer}>
           <p>{x.groupId}</p>
-          <button onClick={() => deleteConsumerById(x.groupId)}>Delete</button>
+          <button onClick={() => deleteConsumer(x)}>Delete</button>
         </div>)
       }
     </div>

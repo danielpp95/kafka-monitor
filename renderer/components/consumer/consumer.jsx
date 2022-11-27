@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { Kafka } from 'kafkajs';
 import styles from './consumer.module.css'
+import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../main/helpers/helpers';
 export default function consumer({
     topic,
-    servers,
+    environmentId,
     fromBeginning,
     groupId}) {
-    const [messages, setMessages] = useState([])
+    const [messages, setMessages] = useState([]);
 
     useEffect(() => {
         let consumer = null;
         const getMessages = async (setMessage) => {
-            const kafka = new Kafka({
-                clientId: 'kafka-monitor',
-                brokers: servers,
-            })
+            const environment = GetEnvironmentById(environmentId);
+
+            if (!environment) {
+                return;
+            }
+
+            const kafka = GetKafkaBusByEnvironment(environment);
 
             consumer = kafka.consumer({ groupId });
             await consumer.connect();
-            await consumer.subscribe({ topic, fromBeginning })
+            await consumer.subscribe({ topic, fromBeginning });
 
             await consumer.run({                
                 eachMessage: ({ topic, partition, message }) => {
                     let m = message.value.toString();
                     let index = 0;
-                    const newArray = [...messages, {
-                        message: m,
-                        headers: message.headers,
-                        id: index++
-                    }]
+                    const newArray = [
+                        ...messages,
+                        {
+                            message: m,
+                            headers: message.headers,
+                            id: index++
+                        }
+                    ];
                     messages = newArray
                     setMessage(newArray)
                 },
@@ -38,8 +44,8 @@ export default function consumer({
         getMessages(setMessages);
         
         return () => {
-            return consumer.disconnect()
-          }
+            return consumer.disconnect();
+        }
     }, [])
         
   return (

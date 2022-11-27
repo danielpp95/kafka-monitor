@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Kafka } from 'kafkajs';
-import { GetEnvironments } from '../../../../../main/db'
+import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../../../main/helpers/helpers'
 import Topic from '../../../../components/topic/topic.jsx';
 
 import styles from './topic.module.css'
@@ -14,20 +13,18 @@ export default function index() {
     
     useEffect(() => {
         const getTopics = async () => {
-            const environment = GetEnvironments().filter(x => x.id === id)[0];
+            const environment = GetEnvironmentById(id);
 
             if (!environment) {
                 return;
             }
 
-            const kafka = new Kafka({
-                clientId: 'kafka-monitor',
-                brokers: environment.servers.split(',')
-            })
+            const kafka = GetKafkaBusByEnvironment(environment);
+            const admin = kafka.admin();
 
-            const admin = kafka.admin()
-            const topicList = await admin.listTopics()
-            const topicsMetadata = await admin.fetchTopicMetadata(topicList)
+            const topicList = await admin.listTopics();
+            const topicsMetadata = await admin.fetchTopicMetadata(topicList);
+            
             setTopics(topicsMetadata.topics);
       }
 

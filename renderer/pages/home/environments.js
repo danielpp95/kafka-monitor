@@ -4,7 +4,7 @@ import { GetEnvironments } from '../../../main/db'
 import Environment from '../../components/environment.jsx'
 
 export default function NewEnvironment() {
-    const [environments, setEnvironments] = useState([])
+    const [environments, setEnvironments] = useState([]);
 
     useEffect(() => {
         const storedEnvironments = GetEnvironments();
