@@ -1,12 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import styles from './consumer.module.css'
 import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../main/helpers/helpers';
+import protobuf from 'protobufjs'
+import path from 'path'
+
 export default function consumer({
     topic,
     environmentId,
     fromBeginning,
     groupId}) {
     const [messages, setMessages] = useState([]);
+
+    const mapToProto = (input) => {
+        const root = new protobuf.Root()
+        root
+            .load('../../../schemas/protos/AutomaticObsoleteDispatcherCommand.proto', {})
+            .then(result => {
+                var AwesomeMessage = root.lookupType("Pokemon.AutomaticObsoleteDispatcherCommand");
+                console.log(AwesomeMessage)
+                console.log(AwesomeMessage.decode(input)) 
+                result.resolveAll()
+                console.log(result.toJSON())   
+            });
+
+        // protobuf.load(
+        //     path.resolve('../../../main/schemas/protos/AutomaticObsoleteDispatcherCommand.proto'),
+        //     function(err, root) {
+        //         if (err)
+        //             throw err;
+        //         console.log(root)
+        //     })
+    }
 
     useEffect(() => {
         let consumer = null;
@@ -25,6 +49,10 @@ export default function consumer({
 
             await consumer.run({                
                 eachMessage: ({ topic, partition, message }) => {
+                    mapToProto(message.value)
+                    // console.log(message)
+                    // console.log(message.value.toString())
+                    // console.log(message.headers)
                     let m = message.value.toString();
                     let index = 0;
                     const newArray = [
@@ -60,6 +88,7 @@ export default function consumer({
                         return (                            
                             <div key={index} className={styles.message}>
                                 <p className={styles.topic}>{x.headers['Message-Type']?.toString()}</p>
+                                <p className={styles.topic}>{x.headers['X-FF-ContractType']?.toString()}</p>
                                 <p className={styles.body} >{x.message}</p>
                             </div>
                             )

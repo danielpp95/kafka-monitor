@@ -1,0 +1,11 @@
+syntax = "proto2";
+package Contracts.DTO.Pokemon;
+
+message AutomaticObsoleteDispatcherCommand
+{
+	required string CommandId = 1;
+	required string ProductCreationStartDate = 2;
+	optional string ProductCreationEndDate = 3;
+	optional int32 Version = 4;
+	optional string RoutingKey = 5;
+}

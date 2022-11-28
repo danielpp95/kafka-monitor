@@ -1,0 +1,13 @@
+.areas {
+    display: flex;
+    justify-content: space-around;
+}
+
+.input {
+    width: 50%;
+    margin: 1em;
+    height: 800px;
+    background-color: #18181b;
+    color: white;
+    tab-size : 2
+}

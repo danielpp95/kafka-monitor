@@ -29,6 +29,10 @@ const MyApp = ({ Component, pageProps }) => {
         <Link href={`/environments/${id}/consumer`}>
           <div className={styles.link}>Consume Messages</div>
         </Link>
+
+        <Link href={`/environments/${id}/protoMappers`}>
+          <div className={styles.link}>Proto mappers</div>
+        </Link>
       </div>
       
       <Component {...pageProps} />
