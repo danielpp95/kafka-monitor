@@ -8,6 +8,7 @@ import styles from './topic.module.css'
 export default function index() {
     const router = useRouter();
     const { id } = router.query;
+    const [filter, setFilter] = useState('');
 
     const [topics, setTopics] = useState(null)
     
@@ -43,8 +44,18 @@ export default function index() {
     return (
         <div>
             <h2 className={styles.title}>Topics</h2>
+
+            <div className={styles.filterBox}>
+                <input type="text"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                    placeholder='Filter'
+                    className={styles.filter}
+                />
+
+            </div>
             {
-                topics.map(topic => {
+                topics.filter(x => x.name.includes(filter)).map(topic => {
                     return <Topic
                         name={topic.name}
                         partitionList={topic.partitions}

@@ -49,10 +49,7 @@ export default function consumer({
 
             await consumer.run({                
                 eachMessage: ({ topic, partition, message }) => {
-                    mapToProto(message.value)
-                    // console.log(message)
-                    // console.log(message.value.toString())
-                    // console.log(message.headers)
+                    // mapToProto(message.value)
                     let m = message.value.toString();
                     let index = 0;
                     const newArray = [
