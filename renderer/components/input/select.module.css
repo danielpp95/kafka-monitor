@@ -62,6 +62,7 @@
 .option {
     padding: 1em;
     border-bottom: 1px solid rgb(140, 140, 140);
+    word-wrap: break-word;
 }
 
 .option:last-child {

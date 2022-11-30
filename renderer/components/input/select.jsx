@@ -50,6 +50,7 @@ export default function select({
                 <button
                     className={value === x ? styles.optionSelected : styles.option}
                     onClick={() => setValue(x)}
+                    key={x}
                 >
                     {x}
                 </button>
