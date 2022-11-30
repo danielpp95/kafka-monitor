@@ -1,3 +1,11 @@
 .title {
     margin-left: 15px;
 }
+
+.filterBox {
+    padding: 1em;
+}
+
+.filter {
+    border-radius: 0 !important;
+}
