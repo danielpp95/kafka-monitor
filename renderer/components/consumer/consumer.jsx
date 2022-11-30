@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './consumer.module.css'
 import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../main/helpers/helpers';
+
 export default function consumer({
     topic,
     environmentId,
@@ -32,7 +33,8 @@ export default function consumer({
                         {
                             message: m,
                             headers: message.headers,
-                            id: index++
+                            id: index++,
+                            key: message.key.toString()
                         }
                     ];
                     messages = newArray
@@ -59,8 +61,18 @@ export default function consumer({
                     .map((x, index) => {
                         return (                            
                             <div key={index} className={styles.message}>
-                                <p className={styles.topic}>{x.headers['Message-Type']?.toString()}</p>
-                                <p className={styles.body} >{x.message}</p>
+                                <div className={styles.partitionKey}>
+                                    <span className={styles.title}>Key: </span>
+                                    <span>{x.key}</span>
+                                </div>
+                                {
+                                    Object.entries(x.headers).map((header, index) => {
+                                        return <div key={index}>
+                                            <span className={styles.topic}>{header[0]}: </span>
+                                            <span className={styles.body}>{header[1].toString()}</span>
+                                        </div>
+                                    })
+                                }
                             </div>
                             )
                     })
