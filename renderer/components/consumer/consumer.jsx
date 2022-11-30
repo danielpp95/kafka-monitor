@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './consumer.module.css'
-import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../main/helpers/helpers';
+import { GetKafkaBusByEnvironment } from '../../../main/helpers/helpers';
+import useStorage from '../../hooks/useStorage';
 
 export default function consumer({
     topic,
@@ -8,11 +9,12 @@ export default function consumer({
     fromBeginning,
     groupId}) {
     const [messages, setMessages] = useState([]);
+    const [environments, setEnvironments] = useStorage('environments-v1', []);
 
     useEffect(() => {
         let consumer = null;
         const getMessages = async (setMessage) => {
-            const environment = GetEnvironmentById(environmentId);
+            const environment = environments?.filter(x => x.id === environmentId)[0];
 
             if (!environment) {
                 return;
@@ -42,13 +44,13 @@ export default function consumer({
                 },
             })
         }
-        
+
         getMessages(setMessages);
-        
+
         return () => {
-            return consumer.disconnect();
+            return consumer?.disconnect();
         }
-    }, [])
+    }, [environments])
         
   return (
     <div className={styles.main}>

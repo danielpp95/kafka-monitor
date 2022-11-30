@@ -1,48 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './home.module.css'
 import NewEnvironment from "./newEnvironment";
 import Environments from "./environments";
 import Layout from '../../common/layout'
-import {
-  InsertEnvironment,
-  GetEnvironments,
-  DeleteEnvironmentById } from '../../../main/db'
+import useStorage from '../../hooks/useStorage';
 
 export default function index() {
-  const [environments, setEnvironments] = useState(null);
-
-  useEffect(() => {
-    setEnvironments(GetEnvironments());
-  }, [])
+  const [environments, setEnvironments] = useStorage('environments-v1', []);
 
   const saveEnvironment = (newEnvironment) => {
-    InsertEnvironment(newEnvironment);
-    setEnvironments(GetEnvironments());
+    setEnvironments([...environments, newEnvironment]);
   }
 
   const RemoveEnvironmentById = (id) => {
-    DeleteEnvironmentById(id)
-    setEnvironments(GetEnvironments());
+    setEnvironments(environments.filter(x => x.id !== id));
   }
 
   return (
     <Layout>
-    <div className={styles.home}>
-        <div className={styles.homeTitle} >Kafka Monitor</div>
-        
-        <div className={styles.homeSelectEnvironment}>
-            <Environments
-              environments={environments}
-              RemoveEnvironmentById={RemoveEnvironmentById}
-            />
-        </div>
+      <div className={styles.home}>
+          <div className={styles.homeTitle} >Kafka Monitor</div>
+          
+          <div className={styles.homeSelectEnvironment}>
+              <Environments
+                environments={environments}
+                RemoveEnvironmentById={RemoveEnvironmentById}
+              />
+          </div>
 
-        <div className={styles.homeNewEnvironment}>    
-            <NewEnvironment insertEnvironment={saveEnvironment}/>
-        </div>
+          <div className={styles.homeNewEnvironment}>    
+              <NewEnvironment insertEnvironment={saveEnvironment}/>
+          </div>
 
-    </div>
-
+      </div>
     </Layout>
   )
 }

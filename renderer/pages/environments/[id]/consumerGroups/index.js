@@ -1,26 +1,21 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import { DeleteConsumerGroupById, GetConsumersGroup } from '../../../../../main/db'
+import React from 'react'
 import styles from './index.module.css'
 import Loading from '../../../../components/loading/loading'
 import EmptyList from '../../../../components/empty/empty'
+import useStorage from '../../../../hooks/useStorage'
 
 export default function index() {
     const router = useRouter()
     const { id } = router.query
-    const [consumerGroups, setConsumerGroups] = useState(null)
-
-    useEffect(() => {
-      setConsumerGroups(GetConsumersGroup());
-    }, [id])
+    const [consumerGroups, setConsumerGroups] = useStorage('consumerGroups-v1', []);
     
     const deleteConsumerGroup = (e, consumer) => {
         if (e.stopPropagation) e.stopPropagation();
 
         if (confirm(`Do you want to delete '${consumer.name}'`)) {
-            DeleteConsumerGroupById(consumer.id);
-            setConsumerGroups(GetConsumersGroup());
+            setConsumerGroups(consumerGroups.filter(x => x.name !== consumer.name));
         }
     }
 

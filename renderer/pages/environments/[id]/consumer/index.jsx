@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import { GetConsumersGroup, InsertConsumersGroup } from '../../../../../main/db'
-import { GetEnvironmentById, GetKafkaBusByEnvironment, NewGuid } from '../../../../../main/helpers/helpers'
+import { GetKafkaBusByEnvironment, NewGuid } from '../../../../../main/helpers/helpers'
 import AddConsumer from '../../../../components/addConsumer/addConsumer'
 import Consumer from '../../../../components/consumer/consumer'
 import styles from './index.module.css'
+import useStorage from '../../../../hooks/useStorage';
 
 export default function index() {
     const router = useRouter();
     const { id, topic, consumerGroup } = router.query;
     const [consumers, setConsumers] = useState([]);
     const [topics, setTopics] = useState([]);
-    const [servers, setServers] = useState([]);
     const [showModal, setShowModal] = useState(false)
-    const [groupName, setGroupName] = useState('')
+    const [groupName, setGroupName] = useState('');
+    const [environments, setEnvironments] = useStorage('environments-v1', []);
+    const [consumerGroups, setConsumerGroups] = useStorage('consumerGroups-v1', []);
+
 
     const addToConsumers = (x) => {
         setConsumers([...consumers, x]);
     }
 
     useEffect(() => {
-        const environment = GetEnvironmentById(id);
+        const environment = environments?.filter(x => x.id === id)[0];
 
         if (!environment) {
             return;
         }
-
-        setServers(environment.servers.split(','));
 
         const getTopics = async() => {
             const kafka = GetKafkaBusByEnvironment(environment);
@@ -36,10 +36,10 @@ export default function index() {
 
         getTopics();
     
-    }, [id])
+    }, [environments])
 
     useEffect(() => {
-      const cg = GetConsumersGroup().filter(x => x.id == consumerGroup)[0];
+      const cg = consumerGroups?.filter(x => x.id == consumerGroup)[0];
 
       if (cg === undefined) {
         return;
@@ -48,7 +48,7 @@ export default function index() {
       setConsumers(cg.consumers);
 
       console.log(cg)
-    }, [consumerGroup])
+    }, [consumerGroups])
 
     const saveConsumersGroup = () => {
         if (groupName === null || groupName === '') {
@@ -60,13 +60,11 @@ export default function index() {
             return
         }
 
-        console.log(GetConsumersGroup());
-        
-        InsertConsumersGroup({
+        setConsumerGroups([...consumerGroups, {
             name: groupName,
             consumers: consumers,
             id: NewGuid(),
-        })
+        }]);
 
         setGroupName('');
         setShowModal(false);

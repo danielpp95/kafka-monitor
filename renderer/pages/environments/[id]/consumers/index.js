@@ -3,7 +3,8 @@ import { useRouter } from 'next/router'
 import styles from './index.module.css'
 import Loading from '../../../../components/loading/loading'
 import EmptyList from '../../../../components/empty/empty'
-import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../../../main/helpers/helpers';
+import { GetKafkaBusByEnvironment } from '../../../../../main/helpers/helpers';
+import useStorage from '../../../../hooks/useStorage'
 
 export default function index() {
   const router = useRouter()
@@ -11,9 +12,10 @@ export default function index() {
   const [groups, setGroups] = useState(null);
   const [servers, setServers] = useState('');
   const [kafkaAdmin, setKafkaAdmin] = useState(null);
+  const [environments, setEnvironments] = useStorage('environments-v1', []);
 
   useEffect(() => {
-    const environment = GetEnvironmentById(id);
+    const environment = environments?.filter(x => x.id === id)[0];
 
     if (!environment) {
       return;
@@ -30,7 +32,7 @@ export default function index() {
     }
 
     getTopics()
-  }, [id])
+  }, [environments])
   
   const deleteConsumer = async (consumer) => {
     try {

@@ -21,6 +21,13 @@ export default function NewEnvironment({
         </div>
     }
 
+    if (environments === {}) {
+        return  <div className={styles.environments}>
+            <h4>Environments</h4>
+            <Empty />
+        </div>
+    }
+
     return (
         <div className={styles.environments}>
             <h4>Environments</h4>

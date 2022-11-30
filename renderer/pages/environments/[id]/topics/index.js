@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { GetEnvironmentById, GetKafkaBusByEnvironment } from '../../../../../main/helpers/helpers'
+import { GetKafkaBusByEnvironment } from '../../../../../main/helpers/helpers'
 import Topic from '../../../../components/topic/topic.jsx';
 
 import styles from './topic.module.css'
+import useStorage from '../../../../hooks/useStorage';
 
 export default function index() {
     const router = useRouter();
@@ -11,10 +12,12 @@ export default function index() {
 
     const [topics, setTopics] = useState(null);
     const [filter, setFilter] = useState('');
+
+    const [environments, setEnvironments] = useStorage('environments-v1', []);
     
     useEffect(() => {
         const getTopics = async () => {
-            const environment = GetEnvironmentById(id);
+            const environment = environments?.filter(x => x.id === id)[0];
 
             if (!environment) {
                 return;
@@ -35,7 +38,7 @@ export default function index() {
       }
 
       getTopics();
-    }, [id])
+    }, [environments])
     
     if (topics === null) {
         return <h2>Loading...</h2>
