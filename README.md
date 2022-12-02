@@ -11,22 +11,14 @@
 <br />
 
 <div align="center">
-  <a href="https://github.com/danielpp95/kafka-monitor">
-    <img src="./docs/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
   <h3 align="center">Kafka Monitor</h3>
-
+  <br />
   <p align="center">
-    <br />
-        <a href="https://github.com/danielpp95/kafka-monitor"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-        <a href="https://github.com/danielpp95/kafka-monitor/releases">Download the app</a>
-        ·
-        <a href="https://github.com/danielpp95/kafka-monitor/issues">Report Bug</a>
-        ·
-        <a href="https://github.com/danielpp95/kafka-monitor/issues">Request Feature</a>
+    <a href="https://github.com/danielpp95/kafka-monitor/releases">Download the app</a>
+    ·
+    <a href="https://github.com/danielpp95/kafka-monitor/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/danielpp95/kafka-monitor/issues">Request Feature</a>
   </p>
 </div>
 
@@ -41,8 +33,6 @@
       <ul><li><a href="#built-with">Built With</a></li></ul>
     </li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#Screenshots">Screenshots</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -149,7 +139,7 @@ Distributed under the MIT License. See `LICENSE.md` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Daniel Pereira - [@aquiOtroDaniel](https://twitter.com/aquiOtroDaniel) - danielpp95@gmail.com
+Daniel Pereira - [@aquiOtroDaniel](https://twitter.com/aquiOtroDaniel) - [danielpp95](https://github.com/danielpp95)
 
 Project Link: [https://github.com/danielpp95/kafka-monitor](https://github.com/danielpp95/kafka-monitor)
 
