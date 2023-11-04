@@ -23,7 +23,7 @@ export default function select({
     const buttonValue = <div className={styles.value}>
         <button onClick={() => toggleOptions()}>
             <div>
-                {value}
+                <p className={styles.valueText}>{value}</p>
                 <p>▼</p>
             </div>
         </button>

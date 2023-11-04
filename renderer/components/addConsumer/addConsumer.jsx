@@ -24,7 +24,12 @@ export default function addConsumer({topics, addConsumer, preSelectedTopic}) {
             <h2 className={styles.h2}>Add consumer</h2>
 
             <div className={styles.topics}>
-                <Select name='Topic' onChange={setSelectedTopic} value={selectedTopic} options={topics} useBlankLine={true} />
+                <Select
+                    name='Topic'
+                    onChange={setSelectedTopic}
+                    value={selectedTopic}
+                    options={topics}
+                    useBlankLine={true} />
             </div>       
 
             <div className={styles.row}>
